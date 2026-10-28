@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 
 // ── API CONFIG ─────────────────────────────────────────────────────────────
-const API_BASE = "http://192.168.131.184:5000";
+// In Docker production, Nginx proxies /api to the private backend service.
+// Set REACT_APP_API_BASE_URL only for a separately hosted API during a build.
+const API_BASE = process.env.REACT_APP_API_BASE_URL || "";
 
 // ── API HELPER ─────────────────────────────────────────────────────────────
 // Central fetch wrapper — attaches JWT, handles errors, returns { data, error }
@@ -1062,3 +1064,4 @@ export default function App() {
     </>
   );
 }
+
